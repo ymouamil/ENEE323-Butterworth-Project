@@ -1,0 +1,37 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[american]{circuitikz}
+
+\definecolor{BG}{HTML}{0D1410}
+\definecolor{FG}{HTML}{E5EFE7}
+\definecolor{BLUE}{HTML}{48A9A6}
+\definecolor{GREEN}{HTML}{73D055}
+\definecolor{GOLD}{HTML}{D4A373}
+
+\ctikzset{
+  bipoles/thickness=1.25,
+  bipoles/length=1.15cm,
+  resistors/scale=0.92,
+  inductors/scale=0.92,
+  capacitors/scale=0.92,
+  voltage shift=0.7,
+}
+\tikzset{circuitLine/.style={draw=FG,line width=1.05pt,line cap=round,line join=round}}
+
+\begin{document}
+\pagecolor{BG}
+\color{FG}
+\begin{circuitikz}[american, scale=1.05, transform shape]
+    \draw[circuitLine] (0,0) to[V, l_=\textcolor{GOLD}{$x(t)$}] (0,3);
+    \draw[circuitLine] (0,3) to[L, l=\textcolor{GOLD}{$9\,\mathrm{H}$}] (3,3);
+    \draw[circuitLine] (3,3) to[L, l=\textcolor{GOLD}{$3\,\mathrm{H}$}] (6,3);
+    \draw[circuitLine] (3,3) to[C, l_=\textcolor{GOLD}{$800\,\mu\mathrm{F}$}] (3,0);
+    \draw[circuitLine] (6,3) to[R, l_=\textcolor{GOLD}{$100\,\Omega$}, *-*] (6,0);
+    \draw[circuitLine] (0,0) -- (6,0);
+    \draw[circuitLine] (3,0) node[sground, color=FG] {};
+    \node[text=GOLD,font=\large\bfseries] at (6.55,3) {$+$};
+    \node[text=BLUE,font=\large\bfseries] at (6.78,1.5) {$y(t)$};
+    \node[text=GOLD,font=\large\bfseries] at (6.55,0) {$-$};
+\end{circuitikz}
+\end{document}
