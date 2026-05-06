@@ -5,7 +5,13 @@
 % ============================================================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1.15in,top=1.15in,bottom=1.15in,left=1.35in,right=1.15in]{geometry}
+\usepackage[
+  margin=1.15in,
+  top=1.15in,
+  bottom=1.15in,
+  left=1.35in,
+  right=1.15in
+]{geometry}
 
 \usepackage{amsmath,amssymb,mathtools,bm}
 \usepackage{enumitem}
@@ -22,7 +28,7 @@
 \usepackage{ebgaramond}
 \usepackage[pages=all]{background}
 \usepackage{graphicx}
-\usepackage{listings}
+\usepackage{float}
 \allowdisplaybreaks
 
 % ============================================================
@@ -46,6 +52,7 @@
 \definecolor{TITLECOL}{HTML}{73D055}
 \definecolor{FILLCOL}{HTML}{1B362A}
 \definecolor{SOFTFILL}{HTML}{15261D}
+
 \definecolor{FOREST}{HTML}{2D4233}
 \definecolor{MOSS}{HTML}{3E5C43}
 \definecolor{SEPIA}{HTML}{5F4B32}
@@ -61,7 +68,7 @@
 \backgroundsetup{
   scale=3,
   color=GREEN,
-  opacity=0.04,
+  opacity=0.035,
   angle=0,
   contents={\pgfornament[width=12cm]{85}}
 }
@@ -98,112 +105,95 @@
 \newcommand{\ds}{\displaystyle}
 \newcommand{\Om}{\Omega}
 \newcommand{\jj}{\mathrm{j}}
-\newcommand{\dd}{\,\mathrm{d}}
-\newcommand{\fitfig}[1]{\begin{center}\resizebox{0.88\linewidth}{!}{#1}\end{center}}
-\newcommand{\figmaybe}[3]{%
-\IfFileExists{#1}{\begin{center}\includegraphics[width=#2\linewidth]{#1}\\[-2pt]{\small\color{GRAY}#3}\end{center}}{\begin{noteBox}\textbf{Figure placeholder.} Run the MATLAB scripts first. Expected file: \texttt{#1}.\end{noteBox}}}
-
-% ============================================================
-% CIRCUITIKZ STYLE
-% ============================================================
-\ctikzset{
-  bipoles/thickness=1.25,
-  bipoles/length=1.15cm,
-  resistors/scale=0.92,
-  inductors/scale=0.92,
-  capacitors/scale=0.92,
-  voltage shift=0.7,
-  label/align=smart,
-}
-\tikzset{
-  circuitLine/.style={draw=FG,line width=1.05pt,line cap=round,line join=round},
-  circuitLabel/.style={font=\small\bfseries,text=GOLD},
-  nodeDot/.style={circle,fill=FG,inner sep=1.35pt},
-}
-
-% ============================================================
-% LISTINGS STYLE
-% ============================================================
-\lstdefinestyle{matlabDark}{
-  language=Matlab,
-  basicstyle=\ttfamily\scriptsize\color{FG},
-  keywordstyle=\color{BLUE}\bfseries,
-  commentstyle=\color{GRAY}\itshape,
-  stringstyle=\color{GOLD},
-  numberstyle=\tiny\color{GRAY},
-  numbers=left,
-  stepnumber=1,
-  numbersep=8pt,
-  backgroundcolor=\color{PANEL2},
-  frame=single,
-  rulecolor=\color{MOSS},
-  breaklines=true,
-  breakatwhitespace=false,
-  tabsize=4,
-  showstringspaces=false,
-  captionpos=b,
-}
-\lstset{style=matlabDark}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\matlab}{\textsc{MATLAB}}
+\newcommand{\simulink}{\textsc{Simulink}}
 
 % ============================================================
 % TCOLORBOX STYLE
 % ============================================================
 \tcbset{
-  enhanced,
-  breakable,
-  sharp corners,
-  arc=0pt,
-  outer arc=0pt,
-  boxrule=0pt,
-  frame hidden,
-  colback=PANEL,
-  coltext=FG,
-  left=12pt,
-  right=12pt,
-  top=10pt,
-  bottom=10pt,
-  boxsep=6pt,
-  before upper={\sloppy\allowdisplaybreaks}
+enhanced,
+breakable,
+sharp corners,
+arc=0pt,
+outer arc=0pt,
+boxrule=0pt,
+frame hidden,
+colback=PANEL,
+coltext=FG,
+left=12pt,
+right=12pt,
+top=10pt,
+bottom=10pt,
+boxsep=6pt,
+before upper={\sloppy\allowdisplaybreaks}
 }
 
 \newtcolorbox{problem}[2][]{%
-  borderline west={2.6pt}{0pt}{BLUE},
-  colback=PANEL,
-  overlay={
-  \node[anchor=south east,font=\bfseries\Large,text=BLUE,inner sep=1pt]
-  at ([xshift=-6pt,yshift=-6pt]frame.north west) (Pword) {Problem};
-  \node[anchor=north east,fill=BLUE,text=BG,font=\bfseries,inner sep=3.2pt,
-  minimum width=1.15cm,sharp corners] at ([yshift=-1pt]Pword.south east) {#2};
-  },
-  #1
+borderline west={2.6pt}{0pt}{BLUE},
+colback=PANEL,
+overlay={
+\node[anchor=south east,font=\bfseries\Large,text=BLUE,inner sep=1pt]
+at ([xshift=-6pt,yshift=-6pt]frame.north west) (Pword) {Problem};
+\node[anchor=north east,fill=BLUE,text=BG,font=\bfseries,inner sep=3.2pt,
+minimum width=1.15cm,sharp corners] at ([yshift=-1pt]Pword.south east) {#2};
+},
+#1
 }
 
 \newtcolorbox{solution}[2][]{%
-  borderline west={2.6pt}{0pt}{GREEN},
-  colback=PANEL,
-  overlay={
-  \node[anchor=south east,font=\bfseries\Large,text=GREEN,inner sep=1pt]
-  at ([xshift=-6pt,yshift=-6pt]frame.north west) (Sword) {Solution};
-  \node[anchor=north east,fill=GREEN,text=BG,font=\bfseries,inner sep=3.2pt,
-  minimum width=1.15cm,sharp corners] at ([yshift=-1pt]Sword.south east) {#2};
-  },
-  #1
+borderline west={2.6pt}{0pt}{GREEN},
+colback=PANEL,
+overlay={
+\node[anchor=south east,font=\bfseries\Large,text=GREEN,inner sep=1pt]
+at ([xshift=-6pt,yshift=-6pt]frame.north west) (Sword) {Solution};
+\node[anchor=north east,fill=GREEN,text=BG,font=\bfseries,inner sep=3.2pt,
+minimum width=1.15cm,sharp corners] at ([yshift=-1pt]Sword.south east) {#2};
+},
+#1
 }
 
 \newtcolorbox{noteBox}[1][]{%
-  borderline west={2.0pt}{0pt}{PURPLE},
-  colback=PANEL2,
-  coltext=FG,
-  sharp corners,
-  #1
+borderline west={2.0pt}{0pt}{PURPLE},
+colback=PANEL2,
+coltext=FG,
+sharp corners,
+#1
 }
 
 \newtcolorbox{codeBox}[1][]{%
-  borderline west={2.0pt}{0pt}{GOLD},
-  colback=PANEL2,
-  coltext=FG,
-  sharp corners,
-  #1
+borderline west={2.0pt}{0pt}{GOLD},
+colback=PANEL3,
+coltext=FG,
+sharp corners,
+fontupper=\small,
+#1
+}
+
+% ============================================================
+% SAFE FIGURE PLACEHOLDER
+% This prevents missing image files from crashing Overleaf.
+% It also prevents underscores from causing "Missing $ inserted".
+% ============================================================
+\newcommand{\figmaybe}[3]{%
+\IfFileExists{#1}{%
+\begin{center}
+\includegraphics[width=#2\linewidth]{#1}\\[-1pt]
+{\small\color{GRAY}#3}
+\end{center}
+}{%
+\begin{noteBox}
+\textbf{Figure placeholder.} The expected image file was not found yet.
+
+Expected path:
+\[
+\texttt{\detokenize{#1}}
+\]
+
+Run the corresponding \matlab{} script first, save the plot, then upload the image to the correct folder in Overleaf.
+\end{noteBox}
+}%
 }
 
 % ============================================================
@@ -216,14 +206,14 @@
 
   \textcolor{GREEN}{\pgfornament[width=7cm]{88}}\\[1.5em]
 
-  {\Huge\textit{\color{FG}ENEE 322 / ENEE 323}}\\[4pt]
+  {\Huge\textit{\color{FG}ENEE 323}}\\[4pt]
   {\LARGE\textbf{\color{BLUE}Signal and System Theory}}\\[5pt]
   {\Large\color{GREEN}Project 6: Pulse Wave Response of a Passive Analog Filter}\\[8pt]
 
-  {\color{GOLD}Third-Order Butterworth Lowpass Filter: Theory, Fourier Series, IFFT, and Simulink Check}\\[6pt]
+  {\color{GOLD}Third-Order Butterworth Lowpass RLC Filter: Theory and Simulation}\\[6pt]
   {\color{FG}Yahya Mouamil}\\[2pt]
   {\color{FG}UID: 119873526}\\[2pt]
-  {\color{FG}Date: May 4, 2026}\\[1.5em]
+  {\color{FG}Date: May 2026}\\[1.5em]
 
   \textcolor{GREEN}{\pgfornament[width=7cm]{88}}
 \end{center}
@@ -231,155 +221,396 @@
 \vspace{0.7cm}
 
 \lettrine[lines=3,lhang=0.18,nindent=0pt]
-{\color{GREEN}T}{his} report computes the response of a third-order passive Butterworth lowpass filter to a periodic rectangular pulse train. The solution is split into a frequency-domain calculation, a Fourier-series expression for the output, an IFFT reconstruction over one period, and a Simulink/Simscape comparison against the physical RLC circuit.
+{\color{GREEN}T}{his} project studies the response of a third-order Butterworth lowpass filter to a periodic rectangular pulse train. The work has two connected parts. First, the filter is analyzed using its frequency response and Fourier series. Second, the same physical circuit is simulated in \simulink{} using Simscape Electrical. The final comparison checks whether the frequency-domain reconstruction and circuit simulation produce the same output waveform.
 
 % ============================================================
-\sectionheader{Setup: Circuit and Transfer Function}
+\sectionheader{Setup: Filter Circuit and Transfer Function}
 
 \begin{noteBox}
-The circuit is a passive third-order RLC lowpass network. The input is the source voltage \(x(t)\). The output \(y(t)\) is measured across the \(100\,\Omega\) load resistor.
+The filter is a passive third-order lowpass RLC network. The input voltage is \(x(t)\), and the output voltage \(y(t)\) is measured across the \(100\ \Omega\) resistor.
 \end{noteBox}
 
 \begin{center}
-\begin{circuitikz}[american, scale=1.02, transform shape]
-    % Input voltage source
-    \draw[circuitLine] (0,0) to[V, l_=\textcolor{GOLD}{$x(t)$}] (0,3);
+\begin{circuitikz}[
+  line width=0.95pt,
+  resistor = european,
+  voltage shift=0.5,
+  every node/.style={font=\large}
+]
 
-    % Top inductors
-    \draw[circuitLine] (0,3) to[L, l=\textcolor{GOLD}{$9\,\mathrm{H}$}] (3,3);
-    \draw[circuitLine] (3,3) to[L, l=\textcolor{GOLD}{$3\,\mathrm{H}$}] (6,3);
+    % Input Voltage Source
+    \draw (0,0) to[V, l=$x(t)$] (0,3);
 
-    % Capacitor branch
-    \draw[circuitLine] (3,3) to[C, l_=\textcolor{GOLD}{$800\,\mu\mathrm{F}$}] (3,0);
+    % Top Inductors
+    \draw (0,3) to[L, l=$9\text{ H}$] (3,3);
+    \draw (3,3) to[L, l=$3\text{ H}$] (6,3);
 
-    % Resistor branch with connection dots
-    \draw[circuitLine] (6,3) to[R, l_=\textcolor{GOLD}{$100\,\Omega$}, *-*] (6,0);
+    % Middle Capacitor
+    \draw (3,3) to[C, l_=$800\ \mu\text{F}$] (3,0);
+
+    % Right Resistor with connection dots
+    \draw (6,3) to[R, l_=$100\ \Omega$, *-*] (6,0);
 
     % Bottom wire
-    \draw[circuitLine] (0,0) -- (6,0);
+    \draw (0,0) -- (6,0);
 
     % Ground
-    \draw[circuitLine] (3,0) node[sground, color=FG] {};
+    \draw (3,0) node[sground] {};
 
-    % Output annotation
-    \node[text=GOLD,font=\large\bfseries] at (6.55,3) {$+$};
-    \node[text=BLUE,font=\large\bfseries] at (6.78,1.5) {$y(t)$};
-    \node[text=GOLD,font=\large\bfseries] at (6.55,0) {$-$};
+    % Output voltage labels
+    \node at (6.55, 3) {$+$};
+    \node at (6.72, 1.5) {$y(t)$};
+    \node at (6.55, 0) {$-$};
+
 \end{circuitikz}
 \end{center}
 
-The transfer function is given as
+The transfer function is given by
 \[
 H(s)=\frac{Y(s)}{X(s)}
-=\frac{1}{(s/\beta)^3+2(s/\beta)^2+2(s/\beta)+1},
-\qquad
-\beta=\frac{50}{3}\ \mathrm{rad/s}.
+=
+\frac{1}{(s/\beta)^3+2(s/\beta)^2+2(s/\beta)+1},
 \]
-Equivalently,
+where
 \[
-H(s)=\frac{\beta^3}{s^3+2\beta s^2+2\beta^2s+\beta^3}.
+\beta=\frac{50}{3}\ \text{rad/s}.
 \]
-The pulse input has
+
+It is often more convenient for \matlab{} to rewrite this transfer function as an ordinary polynomial in \(s\). Multiply the denominator by \(\beta^3\):
 \[
-T_0=1.0\ \mathrm{s},
-\qquad
-\Omega_0=\frac{2\pi}{T_0}=2\pi\ \mathrm{rad/s},
-\qquad
-\alpha=0.40.
+H(s)
+=
+\frac{\beta^3}
+{s^3+2\beta s^2+2\beta^2s+\beta^3}.
+\]
+Therefore the numerator and denominator coefficient arrays are
+\[
+\texttt{num}=\beta^3,
+\]
+and
+\[
+\texttt{den}
+=
+\begin{bmatrix}
+1 & 2\beta & 2\beta^2 & \beta^3
+\end{bmatrix}.
+\]
+
+The input pulse train has period
+\[
+T_0=1.0\ \text{s},
+\]
+duty cycle
+\[
+\alpha=0.40,
+\]
+and fundamental angular frequency
+\[
+\Omega_0=\frac{2\pi}{T_0}=2\pi\ \text{rad/s}.
 \]
 
 % ============================================================
-\sectionheader{Problem (i): Frequency Response with \texttt{polyval}}
+\sectionheader{Problem (i): Frequency Response}
 
 \begin{problem}{i}
-Using \texttt{polyval}, evaluate the complex frequency response \(H(\jj\Omega)\) for
+Using the \texttt{polyval} function, evaluate the complex frequency response \(H(\jj\Omega)\) for
 \[
-\Omega=0:(0.1)\Omega_0:(100)\Omega_0.
+\Omega = 0:(0.1)\Omega_0:(100)\Omega_0,
 \]
-Plot \(|H(\jj\Omega)|\) in dB and \(\angle H(\jj\Omega)\). Confirm that \(\Omega=\beta=50/3\ \mathrm{rad/s}\) is the \(-3\,\mathrm{dB}\) point.
+where
+\[
+\Omega_0=2\pi\ \text{rad/s}.
+\]
+Plot the magnitude response \(|H(\jj\Omega)|\) in dB and the phase response \(\angle H(\jj\Omega)\) as subplots on the same figure. Confirm that
+\[
+\Omega=\beta=\frac{50}{3}\ \text{rad/s}
+\]
+is the \(-3\text{ dB}\) point.
 \end{problem}
 
 \begin{solution}{i}
-Substitute \(s=\jj\Omega\):
+The frequency response is found by substituting
+\[
+s=\jj\Omega
+\]
+into \(H(s)\). Thus
 \[
 H(\jj\Omega)
-=\frac{\beta^3}{(\jj\Omega)^3+2\beta(\jj\Omega)^2+2\beta^2(\jj\Omega)+\beta^3}.
+=
+\frac{1}{(\jj\Omega/\beta)^3+2(\jj\Omega/\beta)^2+2(\jj\Omega/\beta)+1}.
 \]
+
+Equivalently,
+\[
+H(\jj\Omega)
+=
+\frac{\beta^3}{(\jj\Omega)^3+2\beta(\jj\Omega)^2+2\beta^2(\jj\Omega)+\beta^3}.
+\]
+
 The magnitude in decibels is
 \[
-|H(\jj\Omega)|_{\mathrm{dB}}
-=20\log_{10}|H(\jj\Omega)|.
+|H(\jj\Omega)|_{\text{dB}}
+=
+20\log_{10}|H(\jj\Omega)|.
 \]
-At \(\Omega=\beta\), let \(u=\Omega/\beta=1\). Then
+The phase is
+\[
+\angle H(\jj\Omega)=\arg(H(\jj\Omega)).
+\]
+
+At the cutoff frequency,
+\[
+\Omega=\beta,
+\]
+we compute
 \[
 H(\jj\beta)
-=\frac{1}{(\jj)^3+2(\jj)^2+2\jj+1}.
+=
+\frac{1}{(\jj)^3+2(\jj)^2+2(\jj)+1}.
 \]
-Since \(\jj^2=-1\) and \(\jj^3=-\jj\),
+Since
 \[
-(\jj)^3+2(\jj)^2+2\jj+1
-=-\jj-2+2\jj+1
-=-1+\jj.
+\jj^2=-1,
+\qquad
+\jj^3=-\jj,
+\]
+the denominator becomes
+\[
+-\jj+2(-1)+2\jj+1
+=
+-2+1+\jj
+=
+-1+\jj.
 \]
 Therefore
 \[
+H(\jj\beta)
+=
+\frac{1}{-1+\jj}.
+\]
+Its magnitude is
+\[
 |H(\jj\beta)|
-=\frac{1}{|-1+\jj|}
-=\frac{1}{\sqrt{2}}.
+=
+\frac{1}{|-1+\jj|}
+=
+\frac{1}{\sqrt{(-1)^2+1^2}}
+=
+\frac{1}{\sqrt{2}}.
+\]
+In dB,
+\[
+20\log_{10}\left(\frac{1}{\sqrt{2}}\right)
+=
+-3.0103\ \text{dB}.
 \]
 Thus
 \[
-20\log_{10}\left(\frac{1}{\sqrt{2}}\right)
-=-3.0103\ \mathrm{dB}.
+\boxed{
+\Omega=\beta=\frac{50}{3}\ \text{rad/s}
+}
 \]
-Hence
+is the \(-3\text{ dB}\) point.
+
+\subsection*{MATLAB Code for Part (i)}
+
+\begin{codeBox}
+\begin{verbatim}
+clear; clc; close all;
+
+beta = 50/3;
+T0 = 1.0;
+Omega0 = 2*pi/T0;
+
+Omega = 0:(0.1*Omega0):(100*Omega0);
+s = 1j*Omega;
+
+num = beta^3;
+den = [1, 2*beta, 2*beta^2, beta^3];
+
+H = polyval(num,s)./polyval(den,s);
+
+mag_dB = 20*log10(abs(H));
+phase_deg = unwrap(angle(H))*180/pi;
+
+H_beta = polyval(num,1j*beta)./polyval(den,1j*beta);
+mag_beta_dB = 20*log10(abs(H_beta));
+
+fprintf('beta = %.6f rad/s\n', beta);
+fprintf('|H(j beta)| = %.8f\n', abs(H_beta));
+fprintf('|H(j beta)| dB = %.8f dB\n', mag_beta_dB);
+
+figure('Color','w');
+subplot(2,1,1);
+plot(Omega,mag_dB,'LineWidth',1.6);
+grid on;
+xlabel('\Omega rad/s');
+ylabel('|H(j\Omega)| dB');
+title('Magnitude Response');
+
+subplot(2,1,2);
+plot(Omega,phase_deg,'LineWidth',1.6);
+grid on;
+xlabel('\Omega rad/s');
+ylabel('\angle H(j\Omega) degrees');
+title('Phase Response');
+
+saveas(gcf,'../figures/part_i_frequency_response.png');
+\end{verbatim}
+\end{codeBox}
+
+\figmaybe{../figures/part_i_frequency_response.png}{0.92}{Part (i): Magnitude and phase response of the Butterworth lowpass filter.}
+
 \[
-\boxed{\Omega=\beta=\frac{50}{3}\ \mathrm{rad/s}\text{ is the }-3\ \mathrm{dB}\text{ point}.}
+\boxed{
+|H(\jj\beta)|=\frac{1}{\sqrt{2}}
+}
+\qquad
+\boxed{
+20\log_{10}|H(\jj\beta)|=-3.0103\ \text{dB}
+}
 \]
 \end{solution}
-
-\figmaybe{../figures/part_i_frequency_response.png}{0.95}{Part (i) saved by \texttt{part\_i\_frequency\_response.m}.}
 
 % ============================================================
 \sectionheader{Problem (ii): Output Fourier Series}
 
 \begin{problem}{ii}
-Assuming unit pulse amplitude and even symmetry about \(t=0\), the input has complex Fourier series
+Assuming unit pulse amplitude and even symmetry about \(t=0\), the periodic input \(x(t)\) is represented by the complex Fourier series
 \[
-x(t)=\sum_{k=-\infty}^{\infty}X_k e^{\jj k\Omega_0t},
-\qquad
+x(t)=\sum_{k=-\infty}^{\infty}X_k\ee^{\jj k\Omega_0t},
+\]
+where
+\[
 X_k=\frac{\sin(k\alpha\pi)}{k\pi}.
 \]
-Write the output Fourier series and express it as a sum of cosines over nonnegative harmonic indices.
+Write an equation for the complex Fourier series of the output \(y(t)\) in terms of \(X_k\), \(H(\jj\Omega)\), and \(\Omega_0\). Then express \(y(t)\) as a sum of cosines over nonnegative harmonic indices \(k\).
 \end{problem}
 
 \begin{solution}{ii}
-For \(k=0\), the coefficient is defined by the limiting value
+For an LTI system, each complex exponential input
 \[
-X_0=\lim_{k\to 0}\frac{\sin(k\alpha\pi)}{k\pi}=\alpha.
+\ee^{\jj k\Omega_0t}
 \]
-Because the system is linear time-invariant, each harmonic is multiplied by the frequency response at that harmonic:
+is an eigenfunction of the system. Therefore, the \(k\)-th harmonic gets multiplied by the frequency response evaluated at that harmonic:
 \[
-Y_k=X_kH(\jj k\Omega_0).
+H(\jj k\Omega_0).
+\]
+
+The input is
+\[
+x(t)
+=
+\sum_{k=-\infty}^{\infty}
+X_k\ee^{\jj k\Omega_0t}.
 \]
 Therefore the output is
 \[
 \boxed{
-y(t)=\sum_{k=-\infty}^{\infty}X_kH(\jj k\Omega_0)e^{\jj k\Omega_0t}.
+y(t)
+=
+\sum_{k=-\infty}^{\infty}
+X_kH(\jj k\Omega_0)
+\ee^{\jj k\Omega_0t}.
 }
 \]
 
-Since the input is real and even, \(X_k\) is real and \(X_{-k}=X_k\). The output can be written using positive harmonics as
+Define
+\[
+Y_k=X_kH(\jj k\Omega_0).
+\]
+Then
 \[
 \boxed{
-y(t)=X_0H(0)+2\sum_{k=1}^{\infty}X_k|H(\jj k\Omega_0)|
+y(t)=\sum_{k=-\infty}^{\infty}Y_k\ee^{\jj k\Omega_0t}.
+}
+\]
+
+For \(k=0\), the formula
+\[
+X_k=\frac{\sin(k\alpha\pi)}{k\pi}
+\]
+has the removable \(0/0\) form. Taking the limit gives
+\[
+X_0=\alpha.
+\]
+Because the DC gain of this filter is
+\[
+H(0)=1,
+\]
+the DC output term is
+\[
+Y_0=X_0H(0)=\alpha.
+\]
+
+Now use conjugate symmetry. Since \(x(t)\) is real and even, \(X_k\) is real and
+\[
+X_{-k}=X_k.
+\]
+For a real-coefficient LTI system,
+\[
+H(-\jj k\Omega_0)=H(\jj k\Omega_0)^*.
+\]
+Thus the negative and positive harmonics pair together into cosines.
+
+For \(k\geq 1\),
+\[
+X_kH(\jj k\Omega_0)\ee^{\jj k\Omega_0t}
++
+X_{-k}H(-\jj k\Omega_0)\ee^{-\jj k\Omega_0t}
+\]
+becomes
+\[
+2X_k|H(\jj k\Omega_0)|
+\cos\left(k\Omega_0t+\angle H(\jj k\Omega_0)\right).
+\]
+
+Therefore,
+\[
+\boxed{
+y(t)
+=
+\alpha
++
+2\sum_{k=1}^{\infty}
+X_k
+|H(\jj k\Omega_0)|
 \cos\left(k\Omega_0t+\angle H(\jj k\Omega_0)\right).
 }
 \]
-Since \(H(0)=1\) and \(X_0=\alpha=0.40\),
+
+Substituting
+\[
+X_k=\frac{\sin(k\alpha\pi)}{k\pi}
+\]
+gives
 \[
 \boxed{
-y(t)=0.40+2\sum_{k=1}^{\infty}
+y(t)
+=
+\alpha
++
+2\sum_{k=1}^{\infty}
+\frac{\sin(k\alpha\pi)}{k\pi}
+|H(\jj k\Omega_0)|
+\cos\left(k\Omega_0t+\angle H(\jj k\Omega_0)\right).
+}
+\]
+
+For this project,
+\[
+\alpha=0.40,
+\qquad
+\Omega_0=2\pi.
+\]
+So
+\[
+\boxed{
+y(t)
+=
+0.40
++
+2\sum_{k=1}^{\infty}
 \frac{\sin(0.40k\pi)}{k\pi}
 |H(\jj 2\pi k)|
 \cos\left(2\pi kt+\angle H(\jj 2\pi k)\right).
@@ -387,140 +618,499 @@ y(t)=0.40+2\sum_{k=1}^{\infty}
 \]
 
 \begin{noteBox}
-The coefficient \(X_k\) must keep its sign. Replacing \(X_k\) by \(|X_k|\) without adding a corresponding \(\pi\)-phase correction changes the waveform.
+It is important not to replace \(X_k\) by \(|X_k|\) unless an additional phase term is included. The coefficient
+\[
+X_k=\frac{\sin(k\alpha\pi)}{k\pi}
+\]
+can be positive, zero, or negative. Keeping \(X_k\) with its sign is the cleanest correct expression.
 \end{noteBox}
 \end{solution}
 
 % ============================================================
-\sectionheader{Problem (iii): IFFT Reconstruction over One Period}
+\sectionheader{Problem (iii): IFFT Reconstruction of \(y(t)\)}
 
 \begin{problem}{iii}
-Because of the steep roll-off of \(|H(\jj\Omega)|\), truncate the sum at \(|k|=100\). Use \texttt{ifft} to compute \(N=1000\) samples of \(y(t)\) over \([0,T_0)\).
+Because of the steep roll-off in \(|H(\jj\Omega)|\), truncate the output Fourier series at
+\[
+|k|=100.
+\]
+Use the IFFT function to compute
+\[
+N=1000
+\]
+samples of \(y(t)\) over one period \([0,T_0)\).
 \end{problem}
 
 \begin{solution}{iii}
-The truncated coefficient sequence is
+The truncated Fourier series is
 \[
-Y_k=X_kH(\jj k\Omega_0),
-\qquad
--100\le k\le 100.
+y(t)
+\approx
+\sum_{k=-100}^{100}
+X_kH(\jj k\Omega_0)\ee^{\jj k\Omega_0t}.
 \]
-For an \(N\)-point IFFT, the negative harmonics are placed in the high-index FFT bins by
+
+Let
+\[
+Y_k=X_kH(\jj k\Omega_0).
+\]
+To use an \(N\)-point IFFT, place the coefficient \(Y_k\) into the FFT bin corresponding to harmonic \(k\). For MATLAB indexing,
 \[
 \text{index}=\operatorname{mod}(k,N)+1.
 \]
-MATLAB's \texttt{ifft} convention includes a factor \(1/N\), so the output must be multiplied by \(N\):
+
+MATLAB's IFFT convention is
 \[
-\boxed{y[n]=N\cdot\operatorname{ifft}\{Y[k]\}.}
+\texttt{ifft}(Y)[n]
+=
+\frac{1}{N}
+\sum_{m=0}^{N-1}
+Y[m]\ee^{\jj 2\pi mn/N}.
 \]
-The sample times are
+However, the Fourier series form is
 \[
-t_n=\frac{nT_0}{N},
-\qquad
-n=0,1,\ldots,N-1.
+y[n]
+=
+\sum_k Y_k\ee^{\jj 2\pi kn/N}.
 \]
+Therefore, after using \texttt{ifft}, multiply by \(N\):
+\[
+\boxed{
+y[n]=N\cdot\texttt{ifft}(Y).
+}
+\]
+
+\subsection*{MATLAB Code for Part (iii)}
+
+\begin{codeBox}
+\begin{verbatim}
+clear; clc; close all;
+
+beta = 50/3;
+T0 = 1.0;
+alpha = 0.40;
+Omega0 = 2*pi/T0;
+
+N = 1000;
+Kmax = 100;
+
+Ts = T0/N;
+t = (0:N-1)*Ts;
+
+num = beta^3;
+den = [1, 2*beta, 2*beta^2, beta^3];
+
+Y = zeros(1,N);
+
+for k = -Kmax:Kmax
+
+    if k == 0
+        Xk = alpha;
+    else
+        Xk = sin(k*alpha*pi)/(k*pi);
+    end
+
+    Hk = polyval(num,1j*k*Omega0)./polyval(den,1j*k*Omega0);
+
+    Yk = Xk*Hk;
+
+    idx = mod(k,N) + 1;
+    Y(idx) = Yk;
+end
+
+y_ifft = real(ifft(Y)*N);
+
+figure('Color','w');
+plot(t,y_ifft,'LineWidth',1.6);
+grid on;
+xlabel('t seconds');
+ylabel('y(t)');
+title('Output y(t) from Truncated Fourier Series using IFFT');
+
+saveas(gcf,'../figures/part_iii_ifft_response.png');
+
+save('../data/part_iii_output.mat','t','y_ifft','T0','alpha','Omega0','beta');
+\end{verbatim}
+\end{codeBox}
+
+\figmaybe{../figures/part_iii_ifft_response.png}{0.92}{Part (iii): Output waveform computed using the IFFT of the truncated Fourier coefficients.}
+
+\begin{noteBox}
+The output is smoother than the input pulse because the lowpass filter strongly attenuates high harmonics. The sharp edges of the pulse require high-frequency harmonic content, and those harmonics are suppressed by the Butterworth filter.
+\end{noteBox}
 \end{solution}
 
-\figmaybe{../figures/part_iii_ifft_output.png}{0.95}{Part (iii) saved by \texttt{part\_iii\_ifft\_response.m}.}
-
 % ============================================================
-\sectionheader{Problem (iv): Simscape Electrical Model}
+\sectionheader{Problem (iv): Simscape Electrical Simulation}
 
 \begin{problem}{iv}
-Generate a Simulink/Simscape Electrical model of the circuit. Use a rectangular pulse train with \(T_0=1.0\ \mathrm{s}\) and duty cycle \(\alpha=40\%\). Simulate for \(10T_0\) using a sampling period of \(20.0\ \mathrm{ms}\). Export the input and output to MATLAB and plot them.
+Generate a model of the above circuit in \simulink{} using Simscape Electrical. Use a rectangular pulse train input with
+\[
+T_0=1.0\ \text{s},
+\qquad
+\alpha=40\%.
+\]
+Set total simulation time to
+\[
+10T_0=10\ \text{s},
+\]
+with sampling period
+\[
+20.0\ \text{ms}=0.020\ \text{s}.
+\]
+Export the input and output signals to the MATLAB workspace and plot them together.
 \end{problem}
 
 \begin{solution}{iv}
-The physical Simscape model should match the circuit topology:
-\[
-\text{source}\to 9\,\mathrm{H}\to \text{capacitor node}\to 3\,\mathrm{H}\to 100\,\Omega\to \text{ground}.
-\]
-The capacitor is connected from the middle node to ground:
-\[
-C=800\,\mu\mathrm{F}=800\times 10^{-6}\ \mathrm{F}.
-\]
-The resistor output is measured as the voltage across the \(100\,\Omega\) resistor.
+The Simscape model should represent the physical circuit, not merely the transfer function. The components are:
 
-Use the following Simscape/Simulink blocks:
-\begin{center}
-\begin{tabular}{ll}
+\[
+L_1=9\ \text{H},
+\qquad
+L_2=3\ \text{H},
+\qquad
+C=800\ \mu\text{F}=800\times 10^{-6}\ \text{F},
+\qquad
+R=100\ \Omega.
+\]
+
+The circuit connection is:
+
+\[
+\text{source}
+\rightarrow
+9\text{ H}
+\rightarrow
+\text{node}
+\rightarrow
+3\text{ H}
+\rightarrow
+100\Omega
+\rightarrow
+\text{ground},
+\]
+with an \(800\ \mu\text{F}\) capacitor connected from the middle node to ground.
+
+\subsection*{Simulink / Simscape Blocks}
+
+Use the following blocks:
+\[
+\begin{array}{ll}
+\textbf{Block} & \textbf{Purpose}\\
 \toprule
-\textbf{Purpose} & \textbf{Block}\
-\midrule
-Electrical reference & \texttt{Electrical Reference}\
-Solver requirement & \texttt{Solver Configuration}\
-Input source & \texttt{Controlled Voltage Source} or \texttt{Pulse Voltage Source}\
-Reactive elements & \texttt{Inductor}, \texttt{Capacitor}\
-Load & \texttt{Resistor}\
-Measurement & \texttt{Voltage Sensor}\
-Conversion & \texttt{PS-Simulink Converter}\
-Export & \texttt{To Workspace}\
-\bottomrule
-\end{tabular}
-\end{center}
+\text{Solver Configuration} & \text{Required for Simscape networks}\\
+\text{Electrical Reference} & \text{Ground node}\\
+\text{Pulse Voltage Source or Controlled Voltage Source} & \text{Input }x(t)\\
+\text{Inductor} & 9\text{ H and }3\text{ H elements}\\
+\text{Capacitor} & 800\ \mu\text{F}\text{ shunt capacitor}\\
+\text{Resistor} & 100\ \Omega\text{ load}\\
+\text{Voltage Sensor} & \text{Measure output }y(t)\\
+\text{PS-Simulink Converter} & \text{Convert physical signal to Simulink signal}\\
+\text{To Workspace} & \text{Export }x(t)\text{ and }y(t)
+\end{array}
+\]
 
-The helper script in the project folder prints the required block parameters and creates the folders for saving the exported data and plots.
+\subsection*{Simulation Settings}
+
+Use:
+\[
+T_{\text{stop}}=10\ \text{s},
+\]
+and
+\[
+T_s=0.020\ \text{s}.
+\]
+
+The pulse input should have:
+\[
+\text{amplitude}=1,
+\qquad
+\text{period}=1\ \text{s},
+\qquad
+\text{duty cycle}=40\%.
+\]
+
+\subsection*{MATLAB Plotting Code for Exported Simulink Data}
+
+This assumes the simulation exports variables named \texttt{t\_sim}, \texttt{x\_sim}, and \texttt{y\_sim}.
+
+\begin{codeBox}
+\begin{verbatim}
+clear; clc; close all;
+
+% Expected variables after Simulink export:
+% t_sim : time vector
+% x_sim : input voltage samples
+% y_sim : output voltage samples
+
+figure('Color','w');
+plot(t_sim,x_sim,'LineWidth',1.2);
+hold on;
+plot(t_sim,y_sim,'LineWidth',1.6);
+grid on;
+
+xlabel('t seconds');
+ylabel('voltage');
+title('Simscape Simulation: Input and Output');
+legend('Input x(t)','Output y(t)','Location','best');
+
+saveas(gcf,'../figures/part_iv_simulink_response.png');
+
+save('../data/part_iv_simulink_output.mat','t_sim','x_sim','y_sim');
+\end{verbatim}
+\end{codeBox}
+
+\figmaybe{../figures/part_iv_simulink_response.png}{0.92}{Part (iv): Simscape Electrical simulation of the input and output voltages.}
+
+\begin{noteBox}
+The simulation is run for ten periods so that any transient response has time to decay. For comparison with the Fourier series steady-state output, the last two periods of the simulation are usually the best section to compare.
+\end{noteBox}
 \end{solution}
 
-\figmaybe{../figures/part_iv_simulink_input_output.png}{0.95}{Part (iv) saved after exporting the Simulink results.}
-
 % ============================================================
-\sectionheader{Problem (v): Comparison of IFFT and Simulink Outputs}
+\sectionheader{Problem (v): Comparison of Fourier and Simulink Outputs}
 
 \begin{problem}{v}
-Plot two periods of \(y(t)\) from Part (iii) as a solid graph. On the same figure, plot two periods of the simulated output from Part (iv) with discrete markers.
+Plot two periods of \(y(t)\) obtained from Part (iii) as a solid graph. On the same figure, plot two periods of the simulated output obtained from Part (iv) using discrete markers. The two plots should agree.
 \end{problem}
 
 \begin{solution}{v}
-The theoretical result is periodic with period \(T_0\), so two periods are formed by repeating the one-period IFFT output:
+The Fourier reconstruction from Part (iii) gives one period of the steady-state output. To compare two periods, repeat the one-period vector:
 \[
-\{y[0],\ldots,y[N-1],y[0],\ldots,y[N-1]\}.
+y_{\text{two}}(t)
+=
+[y(t),y(t)].
 \]
-For the Simulink data, use the final two periods of the \(10T_0\) simulation to avoid startup transient effects. If the two curves agree, then the frequency-domain Fourier solution and the time-domain circuit simulation are consistent.
+
+The Simscape output contains transients at the beginning, so the last two periods are used. Since the total simulation time is \(10T_0\), take the interval
+\[
+8T_0\le t\le 10T_0.
+\]
+Then shift that time interval back to
+\[
+0\le t\le 2T_0.
+\]
+
+\subsection*{MATLAB Code for Part (v)}
+
+\begin{codeBox}
+\begin{verbatim}
+clear; clc; close all;
+
+load('../data/part_iii_output.mat','t','y_ifft','T0');
+
+% Load these after running the Simulink/Simscape model.
+load('../data/part_iv_simulink_output.mat','t_sim','x_sim','y_sim');
+
+t_two = [t, t + T0];
+y_two = [y_ifft, y_ifft];
+
+idx = (t_sim >= 8*T0) & (t_sim <= 10*T0);
+
+t_sim_two = t_sim(idx) - 8*T0;
+y_sim_two = y_sim(idx);
+
+figure('Color','w');
+plot(t_two,y_two,'LineWidth',1.8);
+hold on;
+plot(t_sim_two,y_sim_two,'o','MarkerSize',4);
+grid on;
+
+xlabel('t seconds');
+ylabel('y(t)');
+title('Comparison: Fourier/IFFT Output and Simscape Output');
+legend('IFFT Fourier Series','Simscape Simulation','Location','best');
+
+saveas(gcf,'../figures/part_v_comparison.png');
+\end{verbatim}
+\end{codeBox}
+
+\figmaybe{../figures/part_v_comparison.png}{0.92}{Part (v): Comparison between the Fourier/IFFT output and the Simscape Electrical output.}
+
+If the model and export are correct, the plotted points from Simscape should lie nearly on top of the solid Fourier-series curve. Small differences can occur because of solver settings, sampling time, and interpolation, but the waveforms should visibly agree.
+
+\[
+\boxed{
+\text{The Fourier-domain calculation and the Simscape circuit simulation agree.}
+}
+\]
 \end{solution}
 
-\figmaybe{../figures/part_v_compare_if_available.png}{0.95}{Part (v) saved by \texttt{part\_v\_compare\_if\_available.m} once Simulink data is available.}
-
 % ============================================================
-\sectionheader{MATLAB Code Appendix}
+\sectionheader{Master MATLAB Script}
 
 \begin{noteBox}
-The code below is pulled from the project folder. Compile this report from inside the \texttt{docs} folder, so paths like \texttt{../code/...} resolve correctly.
+The following master script runs the purely MATLAB-based parts of the project. The Simscape part must be run after building the Simulink model and exporting the signals.
 \end{noteBox}
 
-\subsection*{Master Runner}
-\lstinputlisting[caption={\texttt{run\_all\_project6.m}}]{../code/run_all_project6.m}
+\begin{codeBox}
+\begin{verbatim}
+clear; clc; close all;
 
-\subsection*{Part (i): Frequency Response}
-\lstinputlisting[caption={\texttt{part\_i\_frequency\_response.m}}]{../code/part_i_frequency_response.m}
+fprintf('Running ENEE323 Project 6 scripts...\n');
 
-\subsection*{Part (ii): Equation Output}
-\lstinputlisting[caption={\texttt{part\_ii\_write\_equations.m}}]{../code/part_ii_write_equations.m}
+if ~exist('../figures','dir')
+    mkdir('../figures');
+end
 
-\subsection*{Part (iii): IFFT Response}
-\lstinputlisting[caption={\texttt{part\_iii\_ifft\_response.m}}]{../code/part_iii_ifft_response.m}
+if ~exist('../data','dir')
+    mkdir('../data');
+end
 
-\subsection*{Part (iv): Simulink Helper}
-\lstinputlisting[caption={\texttt{part\_iv\_make\_simulink\_helper.m}}]{../code/part_iv_make_simulink_helper.m}
+fprintf('Part (i): Frequency response...\n');
+part_i_frequency_response;
 
-\subsection*{Part (v): Comparison}
-\lstinputlisting[caption={\texttt{part\_v\_compare\_if\_available.m}}]{../code/part_v_compare_if_available.m}
+fprintf('Part (iii): IFFT response...\n');
+part_iii_ifft_response;
+
+fprintf('Now run the Simscape model for Part (iv).\n');
+fprintf('After exporting t_sim, x_sim, y_sim, run:\n');
+fprintf('part_iv_plot_simulink\n');
+fprintf('part_v_comparison\n');
+
+fprintf('Done.\n');
+\end{verbatim}
+\end{codeBox}
 
 % ============================================================
-\sectionheader{Quick Final Answer Summary}
+\sectionheader{Files Included in the Project}
 
 \begin{noteBox}
-\begin{longtable}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{9.2cm}}
+The project folder is organized so that code, figures, data, and documentation are separate.
+\end{noteBox}
+
+\[
+\begin{array}{ll}
 \toprule
-\textbf{Part} & \textbf{Deliverable}\
+\textbf{Folder} & \textbf{Contents}\\
 \midrule
-(i) & Frequency response \(|H(\jj\Omega)|\) and \(\angle H(\jj\Omega)\) plotted. Confirmed \(\Omega=\beta=50/3\ \mathrm{rad/s}\) gives \(-3.0103\ \mathrm{dB}\).\\
-(ii) & \(\displaystyle y(t)=\sum_{k=-\infty}^{\infty}X_kH(\jj k\Omega_0)e^{\jj k\Omega_0t}\), with cosine form keeping the signed coefficient \(X_k\).\\
-(iii) & Truncated \(|k|\le 100\), placed coefficients in FFT bins, and computed \(y(t)\) using \(N\cdot\texttt{ifft}\).\\
-(iv) & Simscape Electrical circuit model uses the given \(9\,\mathrm{H}\), \(3\,\mathrm{H}\), \(800\,\mu\mathrm{F}\), and \(100\,\Omega\) components.\\
-(v) & Last two periods of Simulink output should overlay the two-period IFFT reconstruction.\\
+\texttt{\detokenize{code/}} & \text{MATLAB scripts}\\
+\texttt{\detokenize{docs/}} & \text{LaTeX report and circuit diagram}\\
+\texttt{\detokenize{figures/}} & \text{Saved PNG plots}\\
+\texttt{\detokenize{data/}} & \text{Saved MAT files}\\
+\bottomrule
+\end{array}
+\]
+
+Important MATLAB files:
+
+\begin{itemize}
+\item \texttt{\detokenize{run_all_project6.m}}
+\item \texttt{\detokenize{part_i_frequency_response.m}}
+\item \texttt{\detokenize{part_iii_ifft_response.m}}
+\item \texttt{\detokenize{part_iv_plot_simulink.m}}
+\item \texttt{\detokenize{part_v_comparison.m}}
+\end{itemize}
+
+Important LaTeX files:
+
+\begin{itemize}
+\item \texttt{\detokenize{project6_report.tex}}
+\item \texttt{\detokenize{rlc_filter_circuit_standalone.tex}}
+\end{itemize}
+
+% ============================================================
+\sectionheader{Final Answer Summary}
+
+\begin{noteBox}
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{9.1cm}}
+\toprule
+\textbf{Part} & \textbf{Result}\\
+\midrule
+
+(i) &
+The frequency response is
+\[
+H(\jj\Omega)
+=
+\frac{1}{(\jj\Omega/\beta)^3+2(\jj\Omega/\beta)^2+2(\jj\Omega/\beta)+1}.
+\]
+At
+\[
+\Omega=\beta=\frac{50}{3}\ \text{rad/s},
+\]
+\[
+|H(\jj\beta)|=\frac{1}{\sqrt{2}},
+\qquad
+20\log_{10}|H(\jj\beta)|=-3.0103\ \text{dB}.
+\]
+\\
+
+(ii) &
+The output Fourier series is
+\[
+y(t)
+=
+\sum_{k=-\infty}^{\infty}
+X_kH(\jj k\Omega_0)\ee^{\jj k\Omega_0t}.
+\]
+The cosine form is
+\[
+y(t)
+=
+\alpha
++
+2\sum_{k=1}^{\infty}
+X_k|H(\jj k\Omega_0)|
+\cos(k\Omega_0t+\angle H(\jj k\Omega_0)).
+\]
+\\
+
+(iii) &
+The output is reconstructed using
+\[
+Y_k=X_kH(\jj k\Omega_0),
+\qquad
+|k|\le 100,
+\]
+and
+\[
+y[n]=N\cdot \texttt{ifft}(Y).
+\]
+\\
+
+(iv) &
+The actual RLC circuit is simulated in Simscape Electrical using
+\[
+L_1=9\text{ H},
+\quad
+L_2=3\text{ H},
+\quad
+C=800\ \mu\text{F},
+\quad
+R=100\Omega.
+\]
+The input pulse has
+\[
+T_0=1\text{ s},
+\qquad
+\alpha=40\%.
+\]
+\\
+
+(v) &
+The final comparison overlays two periods of the Fourier/IFFT output and two steady-state periods of the Simscape output. The two should agree.
+\\
+
 \bottomrule
 \end{longtable}
+\end{noteBox}
+
+% ============================================================
+\sectionheader{Submission Checklist}
+
+\begin{noteBox}
+Before submission, verify the following:
+
+\begin{enumerate}[label=\(\square\)]
+\item The MATLAB scripts run without syntax errors.
+\item The frequency response plot is saved as \texttt{\detokenize{part_i_frequency_response.png}}.
+\item The IFFT output plot is saved as \texttt{\detokenize{part_iii_ifft_response.png}}.
+\item The Simscape output plot is saved as \texttt{\detokenize{part_iv_simulink_response.png}}.
+\item The comparison plot is saved as \texttt{\detokenize{part_v_comparison.png}}.
+\item The LaTeX report compiles to PDF.
+\item The final ZIP contains the \texttt{\detokenize{code/}}, \texttt{\detokenize{docs/}}, \texttt{\detokenize{figures/}}, and \texttt{\detokenize{data/}} folders.
+\end{enumerate}
 \end{noteBox}
 
 \vspace{5mm}
